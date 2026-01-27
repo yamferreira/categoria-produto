@@ -2,8 +2,11 @@ package com.example.categoria_produto.services;
 
 import com.example.categoria_produto.domain.category.Category;
 import com.example.categoria_produto.domain.category.CategoryDTO;
+import com.example.categoria_produto.domain.category.exceptions.CategoryNotFoundException;
 import com.example.categoria_produto.repositories.CategoryRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class CategoryService {
@@ -18,5 +21,20 @@ public class CategoryService {
         Category newCategory = new Category(categoryData);
         this.repository.save(newCategory);
         return newCategory;
+    }
+
+    public List<Category> getAll(){
+        return this.repository.findAll();
+    }
+
+    public Category update(String id, CategoryDTO categoryData){
+        Category category = this.repository.findById(id)
+                .orElseThrow(CategoryNotFoundException::new);
+
+        if(!categoryData.title().isEmpty()) category.setTitle(categoryData.title());
+        if(!categoryData.description().isEmpty()) category.setDescription(categoryData.description());
+
+        this.repository.save(category);
+        return category;
     }
 }

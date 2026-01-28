@@ -37,4 +37,11 @@ public class CategoryService {
         this.repository.save(category);
         return category;
     }
+
+    public void delete(String id){
+        Category category = this.repository.findById(id)
+                .orElseThrow(CategoryNotFoundException:: new);
+
+        this.repository.delete(category);
+    }
 }

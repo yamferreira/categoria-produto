@@ -5,13 +5,16 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "categories")
-@NoArgsConstructor
+//@NoArgsConstructor
 public class Category {
     @Id
     private String id;
     private String title;
     private String description;
     private String ownerId;
+
+    public Category() {
+    }
 
     public Category(CategoryDTO categoryDTO) {
         this.title = categoryDTO.title();

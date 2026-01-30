@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "products")
 //@Getter
 //@Setter
-@NoArgsConstructor
+//@NoArgsConstructor
 public class Product {
     @Id
     private String id;
@@ -19,6 +19,9 @@ public class Product {
     private String ownerId;
     private Integer price;
     private Category category;
+
+    public Product() {
+    }
 
     public Product(ProductDTO data){
         this.title = data.title();
